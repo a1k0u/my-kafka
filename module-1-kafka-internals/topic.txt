@@ -1,0 +1,16 @@
+- Создание топика:
+
+kafka-topics.sh \
+    --create \
+    --if-not-exists \
+    --topic yandex-practicum \
+    --partitions 3 \
+    --replication-factor 2 \
+    --bootstrap-server localhost:9094
+
+- Подробная информация о топике:
+
+Topic: yandex-practicum	TopicId: UpuyYfnETx-_p-19KuSZ1A	PartitionCount: 3	ReplicationFactor: 2	Configs:
+	Topic: yandex-practicum	Partition: 0	Leader: 0	Replicas: 0,1	Isr: 0,1	Elr: 	LastKnownElr:
+	Topic: yandex-practicum	Partition: 1	Leader: 1	Replicas: 1,2	Isr: 1,2	Elr: 	LastKnownElr:
+	Topic: yandex-practicum	Partition: 2	Leader: 2	Replicas: 2,0	Isr: 2,0	Elr: 	LastKnownElr:
