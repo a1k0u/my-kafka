@@ -11,7 +11,18 @@ step-2:
 		--bootstrap-server localhost:9092
 
 step-3:
-	go run ./app/*.go
+	docker exec module-1-kafka-internals-kafka-0-1 kafka-consumer-groups.sh \
+		--all-groups \
+		--delete \
+		--bootstrap-server localhost:9092
+
+	docker exec -u root module-1-kafka-internals-kafka-0-1 sh -c \
+		"echo '$$(< offset.json)' > offset.json && kafka-delete-records.sh  --bootstrap-server localhost:9092 --offset-json-file offset.json"
+
+	go run ./app/*.go \
+		--bootstrap-server localhost:9094 \
+		--topic yandex-practicum \
+		--produce-interval 1s
 
 cleanup:
 	docker compose down

@@ -1,0 +1,20 @@
+{
+    "partitions": [
+      {
+        "topic": "yandex-practicum",
+        "partition": 0,
+        "offset": -1
+      },
+      {
+        "topic": "yandex-practicum",
+        "partition": 1,
+        "offset": -1
+      },
+      {
+        "topic": "yandex-practicum",
+        "partition": 2,
+        "offset": -1
+      }
+    ],
+    "version": 1
+}
