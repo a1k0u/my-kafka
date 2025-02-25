@@ -3,11 +3,21 @@ package main
 import (
 	"context"
 	"time"
+
+	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 )
 
-const PullConsumerPollTimeout = 16 * time.Second
-const PullConsumerFetchMinBytes = 256
-
-func RunPullConsumer(ctx context.Context) func() error {
-	return RunConsumer(ctx, PullConsumer, PullConsumerFetchMinBytes, int(PullConsumerPollTimeout.Milliseconds()))
+func RunPullConsumer(ctx context.Context) error {
+	return Consumer{
+		Name: "Pull Consumer",
+		Config: &kafka.ConfigMap{
+			"bootstrap.servers":  *flagBootstrapServer,
+			"group.id":           "pull_consumer",
+			"fetch.wait.max.ms":  8192,
+			"fetch.min.bytes":    8192,
+			"enable.auto.commit": false,
+		},
+		PollTimeout:         int((8 * time.Second).Milliseconds()),
+		EnabledManualCommit: true,
+	}.Run(ctx)
 }
